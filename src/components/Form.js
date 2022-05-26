@@ -10,9 +10,9 @@ function Form() {
 
   useEffect(() => {
     fetch("https://api.imgflip.com/get_memes")
-    .then(res => res.json())
-    .then(data => setMemesData(data.data.memes))
-  }, [])
+      .then((res) => res.json())
+      .then((data) => setMemesData(data.data.memes));
+  }, []);
 
   function getMemeImage() {
     const rand = Math.floor(Math.random() * memesData.length);
@@ -24,11 +24,9 @@ function Form() {
     }));
   }
   function handleChange(event) {
-    setMeme(prevValue => {
-      return { ...prevValue,
-      [event.target.name] : event.target.value}
-    })
-    
+    setMeme((prevValue) => {
+      return { ...prevValue, [event.target.name]: event.target.value };
+    });
   }
   return (
     <div>
@@ -49,10 +47,11 @@ function Form() {
       <button type="button" className={classes.button} onClick={getMemeImage}>
         Get a new meme image 🖼️
       </button>
-      {meme.randomImage && (
-        <img src={`${meme.randomImage}`} alt="" className={classes.img}></img>
-    ) }
-     <div className={classes.textOnImage}>{meme.topText + " " + meme.bottomText}</div>
+      <img src={meme.randomImage} className={classes.img} alt=""/>
+      <div className={classes.meme}>
+        <h2 className={classes.top}>{meme.topText}</h2>
+        <h2 className={classes.bottom}>{meme.bottomText}</h2>
+      </div>
     </div>
   );
 }
